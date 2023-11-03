@@ -24,13 +24,22 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
+              <a href="{{route('inicio')}}" class="nav-link">
                 <i class="nav-icon fas fa-store"></i>
                 <p>
                   Inicio
                 </p>
               </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{route('categorias')}}" class="nav-link">
+              <i class="nav-icon fas fa-th-list"></i>
+              <p>
+                categorias
+              </p>
+            </a>
+        </li>
 
         </ul>
       </nav>
