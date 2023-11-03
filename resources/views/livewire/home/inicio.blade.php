@@ -21,7 +21,7 @@
                     <td>...</td>
                 </tr>
 
-
+            </x-slot:body>
         </x-table>
 
     </x-card>
