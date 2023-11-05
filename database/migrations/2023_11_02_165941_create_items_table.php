@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('imagen')->nullable();
             $table->string('precio',10,2);
-            $table->usignedInteger('cantidad');
+            $table->unsignedInteger('cantidad');
             $table->date('fecha');
             $table->bigInteger('product_id');
             $table->timestamps();

@@ -49,8 +49,8 @@
             <div class="row">
                 <div class="col">
 
-                    <input wire:model='nombre' type="text" class="form-control" placeholder="Nombre categoria">
-                    @error('nombre')
+                    <input wire:model='name' type="text" class="form-control" placeholder="Nombre categoria">
+                    @error('name')
                         <div class="alert alert-danger w-100 mt-4">{{$message}}</div>
                     @enderror
                 </div>

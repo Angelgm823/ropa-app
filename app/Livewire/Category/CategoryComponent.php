@@ -15,7 +15,7 @@ class CategoryComponent extends Component
     public $totalRegistros=0;
 
     //propiedades de modelo
-    public $nombre;
+    public $name;
     public function render()
     {
         return view('livewire.category.category-component');
@@ -29,14 +29,18 @@ class CategoryComponent extends Component
     public function store(){
         //dump('crear categoria');
         $rules =[
-            'nombre' => 'required|min:5|max:255|unique:categories'
+            'name' => 'required|min:5|max:255|unique:categories'
         ];
         $messages = [
-            'nonbre.required' => 'El nombre es requerido',
-            'nonbre.min' => 'El no puede ser menor a 3 letras',
-            'nonbre.max' => 'El nombre es muy largo',
-            'nonbre.unique' => 'El nombre ya esta registrado'
+            'name.required' => 'El nombre es requerido',
+            'name.min' => 'El no puede ser menor a 3 letras',
+            'name.max' => 'El nombre es muy largo',
+            'name.unique' => 'El nombre ya esta registrado'
         ];
         $this->validate($rules, $messages);
+
+        $category = new Category();
+        $category->name = $this->name;
+        $category->save();
     }
 }
