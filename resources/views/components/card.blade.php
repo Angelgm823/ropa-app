@@ -1,18 +1,19 @@
-
-@props(['cardTitle'=>'', 'cardTools'=>'','cardFooter'=>''])
+@props(['cardTitle' => '', 'cardTools' => '', 'cardFooter' => ''])
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">{{$cardTitle}}</h3>
+        <h3 class="card-title">{{ $cardTitle }}</h3>
         <div class="card-tools">
-            {{$cardTools}}
+            {{ $cardTools }}
         </div>
     </div>
     <div class="card-body">
-        {{$slot}}
+        {{ $slot }}
     </div>
 
     <div class="card-footer">
-        {{$cardFooter}}
+        <div class="float-right">
+            {{ $cardFooter }}
+        </div>
     </div>
 </div>

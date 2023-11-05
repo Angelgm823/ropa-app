@@ -5,24 +5,37 @@ namespace App\Livewire\Category;
 use Livewire\Attributes\Title;
 use App\Models\Category;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Title('Categorias')]
 
 class CategoryComponent extends Component
 {
-    //propiedades de clase
 
+    use WithPagination;
+
+    //propiedades de clase
+    public $search='';
     public $totalRegistros=0;
 
     //propiedades de modelo
     public $name;
     public function render()
     {
-        return view('livewire.category.category-component');
+        if($this->search!=''){
+            $this->resetPage();
+        }
+        $this->totalRegistros = Category::count();
+        $categories = Category::where('name', 'like', '%'.$this->search. '%')
+        ->orderBy('id', 'desc')
+        ->paginate(5);
+        return view('livewire.category.category-component',[
+            'categories' => $categories
+        ]);
     }
 
     public function mount(){
-        $this->totalRegistros = Category::count();
+
     }
 
     //crea categoria
@@ -42,5 +55,10 @@ class CategoryComponent extends Component
         $category = new Category();
         $category->name = $this->name;
         $category->save();
+
+        $this->dispatch('close-modal', 'modalcategory');
+        $this->dispatch('msg', 'Categoria creada correctamente');
+
+        $this->reset(['name']);
     }
 }
