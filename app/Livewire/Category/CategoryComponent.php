@@ -17,9 +17,11 @@ class CategoryComponent extends Component
     //propiedades de clase
     public $search='';
     public $totalRegistros=0;
+    public $cant=5;
 
     //propiedades de modelo
     public $name;
+    public $Id;
     public function render()
     {
         if($this->search!=''){
@@ -28,14 +30,21 @@ class CategoryComponent extends Component
         $this->totalRegistros = Category::count();
         $categories = Category::where('name', 'like', '%'.$this->search. '%')
         ->orderBy('id', 'desc')
-        ->paginate(5);
+        ->paginate($this->cant);
         return view('livewire.category.category-component',[
             'categories' => $categories
         ]);
     }
 
-    public function mount(){
+   /* public function mount(){
 
+    }
+*/
+
+    public function create(){
+        $this->reset(['name']);
+
+        $this->dispatch('open-modal', 'modalcategory');
     }
 
     //crea categoria
@@ -46,7 +55,7 @@ class CategoryComponent extends Component
         ];
         $messages = [
             'name.required' => 'El nombre es requerido',
-            'name.min' => 'El no puede ser menor a 3 letras',
+            'name.min' => 'El nombre no puede ser menor a 3 letras',
             'name.max' => 'El nombre es muy largo',
             'name.unique' => 'El nombre ya esta registrado'
         ];
@@ -60,5 +69,39 @@ class CategoryComponent extends Component
         $this->dispatch('msg', 'Categoria creada correctamente');
 
         $this->reset(['name']);
+    }
+
+    public function edit(Category $category){
+
+        $this->Id = $category->id;
+
+        $this-> name = $category->name;
+
+        $this->dispatch('open-modal', 'modalcategory');
+        //dump($category);
+    }
+
+    public function update(Category $category){
+
+        $rules =[
+            'name' => 'required|min:5|max:255|unique:categories,id,'.$this->Id
+        ];
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'name.min' => 'El nombre no puede ser menor a 3 letras',
+            'name.max' => 'El nombre es muy largo',
+            'name.unique' => 'El nombre ya esta registrado'
+        ];
+
+        $this->validate($rules, $messages);
+
+        $category->name  = $this->name;
+        $category->update();
+
+        $this->dispatch('close-modal', 'modalcategory');
+        $this->dispatch('msg', 'Categoria editada correctamente');
+
+        $this->reset(['name']);
+        //dump($category);
     }
 }

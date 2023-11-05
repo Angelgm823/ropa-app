@@ -3,7 +3,7 @@
         <span>
             mostrar
         </span>
-        <select>
+        <select wire:model.live='cant'>
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
