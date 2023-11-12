@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Category;
 
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use App\Models\Category;
 use Livewire\Component;
@@ -36,14 +37,17 @@ class CategoryComponent extends Component
         ]);
     }
 
-   /* public function mount(){
+    public function mount(){
 
     }
-*/
+
 
     public function create(){
-        $this->reset(['name']);
 
+        $this->Id=0;
+
+        $this->reset(['name']);
+        $this->resetErrorBag();
         $this->dispatch('open-modal', 'modalcategory');
     }
 
@@ -102,6 +106,14 @@ class CategoryComponent extends Component
         $this->dispatch('msg', 'Categoria editada correctamente');
 
         $this->reset(['name']);
-        //dump($category);
+    }
+
+    #[On('destroyCategory')]
+    public function destroy($id){
+        $category = Category::findOrfail($id);
+
+        $category->delete();
+        $this->dispatch('msg', 'Categoria a sido eliminada correctamente');
+        $this->reset(['name']);
     }
 }

@@ -6,3 +6,5 @@
 <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+<!-- Sweetalert -->
+<link rel="stylesheet" href="{{asset('plugins/sweetalert2/sweetalert2.css')}}">

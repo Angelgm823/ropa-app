@@ -34,8 +34,9 @@
                             <i class="fas fa-edit"></i>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-danger btn-xs" title="eliminar">
-                            <i class="fas fa-trash-alt"></i>
+                        <a wire:click="$dispatch('delete',{id: {{$category->id}}, eventName:'destroyCategory'})" class="btn btn-danger btn-xs"
+                        title="eliminar">
+                            <i class="far fa-trash-alt"></i>
                     </td>
                 </tr>
 
