@@ -37,9 +37,7 @@ class CategoryComponent extends Component
         ]);
     }
 
-    public function mount(){
 
-    }
 
 
     public function create(){
