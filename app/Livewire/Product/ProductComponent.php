@@ -5,11 +5,16 @@ namespace App\Livewire\Product;
 use App\Models\Product;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 
 #[Title('Productos')]
 
 class ProductComponent extends Component
 {
+    use WithPagination;
+    use WithFileUploads;
+
     public $search='';
     public $totalRegistros=0;
     public $cant=5;
@@ -62,7 +67,11 @@ class ProductComponent extends Component
         ];
 
 
-        $this->validate($rules);
+        //$this->validate($rules);
+        if($this->image){
+            $customName = 'products/'.uniqid().'.'.$this->image->extension();
+            $this->image->storeAs('public', $customName);
+        }
 /*
         $category = new Category();
         $category->name = $this->name;
