@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    //Relacion poliformica image
+    public function image(){
+        return $this->morphOne('App\Models\Image', 'imageable');
+    }
 }

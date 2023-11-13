@@ -1,5 +1,4 @@
 <div>
-    <h1>Componente Categorias</h1>
 
     <x-card cardTitle="Lista de categorias ({{ $this->totalRegistros }})" >
         <x-slot:cardTools>
