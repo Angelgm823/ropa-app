@@ -71,7 +71,7 @@ class ProductComponent extends Component
             'precio_compra' => 'numeric|nullable',
             'precio_venta' => 'required|numeric|nullable',
             'stock' => 'required|numeric',
-            'stock_min' => 'mumeric|nullable',
+            'stock_min' => 'numeric|nullable',
             'image' => 'image|max:2046|nullable',
             'category_id' => 'required|numeric',
         ];
@@ -102,7 +102,7 @@ class ProductComponent extends Component
 
 
         }
-        $this->dispatch('close-modal', 'modalcategory');
+        $this->dispatch('close-modal', 'modalProduct');
         $this->dispatch('msg', 'Producto creado correctamente');
 
         $this->clean();

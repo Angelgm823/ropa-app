@@ -129,6 +129,6 @@
             </div>
 
         </div>
-        <button class="btn btn-primary float-right">{{ $Id == 0 ? 'Guardar' : 'Editar' }}</button>
+        <button wire:loading.attr='disabled' class="btn btn-primary float-right">{{ $Id == 0 ? 'Guardar' : 'Editar' }}</button>
     </form>
 </x-modal>

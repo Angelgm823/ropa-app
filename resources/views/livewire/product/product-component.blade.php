@@ -27,12 +27,14 @@
             @forelse ($products as $product)
                 <tr>
                     <td>{{$product->id}}</td>
-                    <td>imagen</td>
+                    <td>
+                        <x-image :item="$product"/>
+                    </td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->precio_venta}}</td>
-                    <td>{{$product->stock}}</td>
+                    <td>{!!$product->stockLavel!!}</td>
                     <td>{{$product->category_id}}</td>
-                    <td>True</td>
+                    <td>{{$product->active ? 'Activo' : 'Inactivo'}}</td>
                     <td>
                         <a href="#" class="btn btn-success btn-xs" title="ver">
                             <i class="far fa-eye"></i>
