@@ -34,7 +34,7 @@
                     <td>{{$product->category_id}}</td>
                     <td>True</td>
                     <td>
-                        <a href="{{route('categorias.show', $product)}}" class="btn btn-success btn-xs" title="ver">
+                        <a href="#" class="btn btn-success btn-xs" title="ver">
                             <i class="far fa-eye"></i>
                         </a>
                     </td>

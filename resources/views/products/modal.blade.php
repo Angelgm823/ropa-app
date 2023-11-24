@@ -16,7 +16,10 @@
                 <label for="category_id">Categoria: </label>
 
                 <select wire:model='category_id' id="category_id" class="form-control">
-                    <option value="0"></option>
+                    @foreach ($this->categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+
                 </select>
                 @error('category_id')
                     <div class="alert alert-danger w-100 mt-4">{{ $message }}</div>
@@ -39,7 +42,7 @@
             <div class="form-group col-4">
                 <label for="precio_compra">Precio de compra: </label>
                 <input wire:model='precio_compra' type="number" class="form-control"
-                placeholder="Precio de compra">
+                placeholder="Precio de compra" min="0" step="any">
                 @error('precio_compra')
                     <div class="alert alert-danger w-100 mt-4">{{ $message }}</div>
                 @enderror
@@ -49,7 +52,7 @@
             <div class="form-group col-4">
                 <label for="precio_venta">Precio de venta: </label>
                 <input wire:model='precio_venta' type="number" class="form-control"
-                placeholder="Precio de venta">
+                placeholder="Precio de venta" min="0" step="any">
                 @error('precio_venta')
                     <div class="alert alert-danger w-100 mt-4">{{ $message }}</div>
                 @enderror
@@ -69,7 +72,7 @@
             <div class="form-group col-4">
                 <label for="stock"> Stock: </label>
                 <input wire:model='stock' type="number" class="form-control"
-                placeholder="Stock">
+                placeholder="Stock" min="0">
                 @error('stock')
                     <div class="alert alert-danger w-100 mt-4">{{ $message }}</div>
                 @enderror
@@ -77,10 +80,10 @@
 
             {{--Stock minimo--}}
             <div class="form-group col-4">
-                <label for="stock_minimo"> Stock: </label>
-                <input wire:model='stock_minimo' type="number" class="form-control"
-                placeholder="Stock minimo">
-                @error('stock_minimo')
+                <label for="stock_min"> Stock: </label>
+                <input wire:model='stock_min' type="number" class="form-control"
+                placeholder="Stock minimo" min="0">
+                @error('stock_min')
                     <div class="alert alert-danger w-100 mt-4">{{ $message }}</div>
                 @enderror
             </div>
@@ -88,8 +91,7 @@
             {{--Fecha de vencimiento--}}
             <div class="form-group col-4">
                 <label for="fecha_vencimiento"> Fecha de vencimiento: </label>
-                <input wire:model='fecha_vencimiento' type="date" class="form-control"
-                placeholder="Fecha de vencimiento">
+                <input wire:model='fecha_vencimiento' type="date" class="form-control">
                 @error('fecha_vencimiento')
                     <div class="alert alert-danger w-100 mt-4">{{ $message }}</div>
                 @enderror
@@ -98,7 +100,7 @@
             {{--check active--}}
             <div class="form-group col-3">
                 <div class="icheck-primary">
-                    <input wire:model='active' type="checkbox" id="active">
+                    <input wire:model='active' type="checkbox" id="active" checked>
                     <label for="active">
                         Esta activo?
                     </label>
@@ -121,8 +123,9 @@
 
             {{--input imagen--}}
             <div class="form-group col-6">
-
-                <img src="" alt="">
+                @if ($this->image)
+                    <img src="{{$image->temporaryUrl()}}" class="rounded float-right" width="200px">
+                @endif
             </div>
 
         </div>
