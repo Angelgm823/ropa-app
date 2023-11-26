@@ -123,6 +123,12 @@
 
             {{--input imagen--}}
             <div class="form-group col-6">
+
+                @if ($Id > 0)
+                    <x-image :item="$product = App\Models\Product::find($Id)" size="200" float="float-right"/>
+
+                @endif
+
                 @if ($this->image)
                     <img src="{{$image->temporaryUrl()}}" class="rounded float-right" width="200px">
                 @endif

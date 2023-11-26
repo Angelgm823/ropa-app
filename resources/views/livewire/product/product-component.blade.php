@@ -31,12 +31,14 @@
                         <x-image :item="$product"/>
                     </td>
                     <td>{{$product->name}}</td>
-                    <td>{{$product->precio_venta}}</td>
+                    <td>{!!$product->precio!!}</td>
                     <td>{!!$product->stockLavel!!}</td>
-                    <td>{{$product->category_id}}</td>
-                    <td>{{$product->active ? 'Activo' : 'Inactivo'}}</td>
                     <td>
-                        <a href="#" class="btn btn-success btn-xs" title="ver">
+                        <a class="badge badge-secondary" href="{{route('categorias.show', $product->category->id)}}"> {{$product->category->name}}</a>
+                    </td>
+                    <td>{!!$product->activeLabel!!}</td>
+                    <td>
+                        <a href="{{route('products.show', $product)}}" class="btn btn-success btn-xs" title="ver">
                             <i class="far fa-eye"></i>
                         </a>
                     </td>

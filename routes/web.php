@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Product\ProductComponent;
+use App\Livewire\Product\ProductShow;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Home\Inicio;
 use App\Livewire\Category\CategoryComponent;
@@ -31,3 +32,5 @@ Route::get('/categorias', CategoryComponent::class)->name('categorias');
 Route::get('/categorias/{category}', CategoryShow::class)->name('categorias.show');
 
 Route::get('/productos', ProductComponent::class)->name('products');
+
+Route::get('/productos/{product}', ProductShow::class)->name('products.show');
