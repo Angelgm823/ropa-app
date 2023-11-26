@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -174,6 +175,19 @@ class ProductComponent extends Component
         $this->dispatch('msg', 'Producto editado correctamente');
 
        $this->clean();
+    }
+
+    #[On('destroyProduct')]
+    public function destroy($id){
+        $product = Product::findOrfail($id);
+
+        if($product->image!=null){
+            Storage::delete('public/'.$product->image->url);
+            $product->image()->delete();
+        }
+
+        $product->delete();
+        $this->dispatch('msg', 'Producto a sido eliminado correctamente');
     }
 
 
