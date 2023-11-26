@@ -14,18 +14,20 @@
         @foreach ($products as $product)
             <li class="list-group-item">
                 <h5>
-                    <x-image :item="$product" size="50"/>
-                    {{$product->name}}
+                    <a href="{{route('products.show', $product)}}" class="text-white">
+                        <x-image :item="$product" size="50" />
+                        {{ $product->name }}
+                    </a>
                 </h5>
                 <div class="d-flex justify-content-between">
                     <div class="mr-1">
                         Precio de venta:
                         <span class="badge badge-pill badge-info">
-                            {!!$product->precio!!}
+                            {!! $product->precio !!}
                         </span>
                     </div>
                     <div>
-                        Stock: {!!$product->stockLavel!!}
+                        Stock: {!! $product->stockLavel !!}
 
                     </div>
                 </div>

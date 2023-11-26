@@ -19,24 +19,26 @@
 
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <img src="{{asset('dist/img/avatar5.png')}}" class="user-image img-circle elevation-2" alt="User Image">
-          <span class="d-none d-md-inline">Nombre</span>
+          <img src="{{auth()->user()->imagen}}" class="user-image img-circle elevation-2" alt="User Image">
+          <span class="d-none d-md-inline">{{auth()->user()->name}}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
           <!-- User image -->
           <li class="user-header bg-lightblue">
-            <img src="{{asset('dist/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{auth()->user()->imagen}}" class="img-circle elevation-2" alt="User Image">
 
             <p>
-              Nombre
-              <small>Cargo</small>
+              {{auth()->user()->name}}
+              <small>
+                {{auth()->user()->perfil ? 'Administrador' : 'Vendedor'}}
+              </small>
             </p>
           </li>
           <!-- Menu Body -->
 
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a class="btn btn-default btn-flat">Perfil</a>
+            <a href="{{route('users.show',auth()->user())}}">Perfil</a>
             <a class="btn btn-default btn-flat float-right" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">

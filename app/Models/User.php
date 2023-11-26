@@ -3,9 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -42,6 +44,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected function activeLabel() : Attribute{
+        return Attribute::make(
+            get: function(){
+                return $this->attributes['active'] ?
+                '<span class="badge badge-success">Activo</span>' :
+                '<span class="badge badge-danger">Inactivo</span>';
+            }
+        );
+    }
+
+    protected function imagen() : Attribute{
+        return Attribute::make(
+            get: function(){
+                return $this->image ? Storage::url('public/'.$this->image->url) : asset('no-image.png');
+            }
+        );
+    }
     public function image(){
         return $this->morphOne('App\Models\Image', 'imageable');
     }
