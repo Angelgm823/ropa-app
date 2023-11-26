@@ -3,6 +3,8 @@
 namespace App\Livewire\Client;
 
 
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Client;
@@ -116,6 +118,14 @@ class ClientComponent extends Component
         $this->dispatch('msg', 'Cliente editad correctamente');
 
         $this->clean();
+    }
+
+    #[On('destroyClient')]
+    public function destroy($id){
+        $client = Client::findOrfail($id);
+
+        $client->delete();
+        $this->dispatch('msg', 'Cliente a sido eliminado correctamente');
     }
 
     public function clean()

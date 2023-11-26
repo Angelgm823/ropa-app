@@ -29,12 +29,12 @@
                 <td>{{$cliente->telefono}}</td>
 
                 <td>
-                    <a href="{{route('clients.show', $cliente)}}}" class="btn btn-success btn-sm" title="Ver">
+                    <a href="{{route('clients.show',$cliente)}}" class="btn btn-success btn-sm" title="Ver">
                         <i class="far fa-eye"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="{{route('clients.show',$cliente)}}" wire:click='edit({{$cliente->id}})' class="btn btn-primary btn-sm" title="Editar">
+                    <a href="#" wire:click='edit({{$cliente->id}})' class="btn btn-primary btn-sm" title="Editar">
                         <i class="far fa-edit"></i>
                     </a>
                 </td>
