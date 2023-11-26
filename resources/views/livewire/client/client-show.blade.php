@@ -15,6 +15,11 @@
                     <h2 class="profile-username text-center">{{$client->nombre}}</h2>
 
                     <ul class="list-group mb-3">
+
+                        <li class="list-group-item">
+                            <b>Identificacion</b> <a class="float-right">{{$client->identificacion}}</a>
+                        </li>
+
                         <li class="list-group-item">
                             <b>Correo</b> <a class="float-right">{{$client->correo}}</a>
                         </li>
@@ -29,6 +34,10 @@
 
                         <li class="list-group-item">
                             <b>Nit</b> <a class="float-right">{{$client->nit}}</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <b>Creado</b> <a class="float-right">{{$client->created_at}}</a>
                         </li>
 
                     </ul>
