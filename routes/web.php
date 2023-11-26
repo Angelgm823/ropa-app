@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Home\Inicio;
 use App\Livewire\Category\CategoryComponent;
 use App\Livewire\Category\CategoryShow;
+use App\Livewire\Client\ClientShow;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,3 +42,4 @@ Route::get('/ususrios', UserComponent::class)->name('users')->middleware(['auth'
 Route::get('/ususrios/{user}', UserShow::class)->name('users.show')->middleware(['auth']);
 
 Route::get('/clientes', ClientComponent::class)->name('clients')->middleware(['auth']);
+Route::get('/clientes/{client}', ClientShow::class)->name('clients.show')->middleware(['auth']);
