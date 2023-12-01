@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Sale;
 
+use App\Models\Cart;
 use App\Models\Product;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -26,12 +28,25 @@ class SaleCreate extends Component
 
         $this->totalRegistros = Product::count();
 
-        $products = Product::where('name','LIKE','%'.$this->search.'%')
+
+        return view('livewire.sale.sale-create',[
+            'products' => $this->products,
+            'cart'=> Cart::getCart(),
+            'total'=> Cart::getTotal(),
+        ]);
+    }
+
+    public function addProduct(Product $product){
+        //dump($product);
+        Cart::add($product);
+    }
+    //listado de productos
+    #[Computed()]
+    public function products(){
+        return Product::where('name','LIKE','%'.$this->search.'%')
         ->orderBy('id','desc')
         ->paginate($this->cant);
 
-        return view('livewire.sale.sale-create',[
-            'products' => $products
-        ]);
+
     }
 }

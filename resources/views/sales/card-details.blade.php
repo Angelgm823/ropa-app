@@ -10,7 +10,7 @@
             <span class="badge badge-pill bg-purple">0 </span>
         </div>
     </div>
-<!-- card-body -->
+    <!-- card-body -->
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-hover table-sm table-striped text-center">
@@ -22,47 +22,50 @@
                         <th scope="col">Precio.vt</th>
                         <th scope="col" width="15%">Qty</th>
                         <th scope="col">Sub total</th>
-                        <th scope="col">...</th>
+                        <th scope="col">Agregar</th>
                     </tr>
 
                 </thead>
+
                 <tbody>
 
+
+                    @forelse ($cart as $product)
                     <tr>
-                        <td></td>
-                        <td>
-                            <img src="" width="50" class="img-fluid rounded">
+                        <td>{{$product->id}}</td>
+                    <td>
+                        <x-image :item="$product->associatedModel" size="70"/>
 
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <!-- Botones para aumentar o disminuir la cantidad del producto en el carrito -->
-                            <button class="btn btn-primary btn-xs" >
-                                -
-                            </button>
+                    </td>
+                    <td>{{$product->name}}</td>
+                    <td>{!!$product->associatedModel->precio!!}</td>
+                    <td>
+                        <!-- Botones para aumentar o disminuir la cantidad del producto en el carrito -->
+                        <button class="btn btn-primary btn-xs">
+                            -
+                        </button>
 
-                            <span class="mx-1">0</span>
+                        <span class="mx-1">{{$product->quantity}}</span>
 
-                            <button class="btn btn-primary btn-xs" >
-                                +
-                            </button>
+                        <button class="btn btn-primary btn-xs">
+                            +
+                        </button>
 
-                        </td>
-                        <td>0</td>
-                        <td>
-                            <!-- Boton para eliminar el producto del carrito -->
-                            <button class="btn btn-danger btn-xs" title="Eliminar">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </td>
+                    </td>
+                    <td>{{money($product->quantity*$product->price)}}</td>
+                    <td>
+                        <!-- Boton para eliminar el producto del carrito -->
+                        <button class="btn btn-danger btn-xs" title="Eliminar">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
 
                     </tr>
-
+                    @empty
                     <tr>
                         <td colspan="10">Sin Registros</td>
                     </tr>
-
+                    @endforelse
                     <tr>
                         <td colspan="4"></td>
                         <td>
@@ -71,7 +74,8 @@
                         <td>
                             <h5>
                                 <span class="badge badge-pill badge-secondary">
-                                    0</span>
+                            {{money($total)}}
+                            </span>
                             </h5>
                         </td>
                         <td></td>
@@ -80,7 +84,7 @@
 
                         <td colspan="7">
                             <strong>Total en letras:</strong>
-                            0
+                            {{numLetras($total)}}
                         </td>
                     </tr>
                 </tbody>
@@ -88,5 +92,5 @@
         </div>
 
     </div>
-<!-- end-card-body -->
+    <!-- end-card-body -->
 </div>

@@ -15,7 +15,7 @@
                 <th scope="col">Stock</th>
                 <th scope="col">...</th>
 
-                </x-slot>
+            </x-slot>
 
                 @forelse ($products as $product)
 
@@ -23,7 +23,7 @@
                 <tr>
                     <td>{{$product->id}}</td>
                     <td>
-                        <x-image :item="$product" size='60'/>
+                        <x-image :item="$product" size='60' />
 
                     </td>
                     <td>{{$product->name}}</td>
@@ -31,7 +31,7 @@
                     <td>{!!$product->stockLavel!!}</td>
                     <td>
 
-                        <button class="btn btn-primary btn-sm" title="Agregar">
+                        <button wire:click="addProduct({{$product->id}})" class="btn btn-primary btn-sm" title="Agregar">
                             <i class="fas fa-plus-circle"></i>
                         </button>
                     </td>
@@ -48,7 +48,7 @@
 
     </div>
     <div class="card-footer">
-    {{$products->links()}}
+        {{$products->links()}}
     </div>
 
 </div>
