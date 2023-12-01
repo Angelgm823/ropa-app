@@ -22,7 +22,7 @@
                         <th scope="col">Precio.vt</th>
                         <th scope="col" width="15%">Qty</th>
                         <th scope="col">Sub total</th>
-                        <th scope="col">Agregar</th>
+                        <th scope="col">Eliminar</th>
                     </tr>
 
                 </thead>
@@ -41,13 +41,17 @@
                     <td>{!!$product->associatedModel->precio!!}</td>
                     <td>
                         <!-- Botones para aumentar o disminuir la cantidad del producto en el carrito -->
-                        <button class="btn btn-primary btn-xs">
+                        <button
+                        wire:click='decrement({{$product->id}})'
+                        class="btn btn-primary btn-xs">
                             -
                         </button>
 
                         <span class="mx-1">{{$product->quantity}}</span>
 
-                        <button class="btn btn-primary btn-xs">
+                        <button
+                        wire:click='increment({{$product->id}})'
+                        class="btn btn-primary btn-xs">
                             +
                         </button>
 
@@ -55,7 +59,10 @@
                     <td>{{money($product->quantity*$product->price)}}</td>
                     <td>
                         <!-- Boton para eliminar el producto del carrito -->
-                        <button class="btn btn-danger btn-xs" title="Eliminar">
+                        <button
+                        wire:click='removeItem({{$product->id}})'
+                        class="btn btn-danger btn-xs" title="Eliminar">
+                        Eliminar
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>

@@ -37,8 +37,24 @@ class SaleCreate extends Component
     }
 
     public function addProduct(Product $product){
-        //dump($product);
         Cart::add($product);
+    }
+    //Decrementa cantidad
+    public function decrement($id){
+        Cart::decrement($id);
+    }
+    //Incrementa cantidad
+    public function increment($id){
+        Cart::increment($id);
+    }
+    //elimina item
+    public function removeItem($id){
+        Cart::removeItem($id);
+    }
+
+    //cancela venta
+    public function clear(){
+        Cart::clear();
     }
     //listado de productos
     #[Computed()]
