@@ -55,4 +55,7 @@ class Cart
     {
          \Cart::session(userID())->clear();
     }
+    public static function totalArticulos(){
+        return \Cart::session(userID())->getTotalQuantity();
+    }
 }

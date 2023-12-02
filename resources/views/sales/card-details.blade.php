@@ -4,10 +4,10 @@
         <div class="card-tools">
             <!-- Conteo de productos -->
             <i class="fas fa-tshirt" title="Numero productos"></i>
-            <span class="badge badge-pill bg-purple">0 </span>
+            <span class="badge badge-pill bg-purple">{{$cart->count()}} </span>
             <!-- Conteo de articulos -->
             <i class="fas fa-shopping-basket ml-2" title="Numero items"></i>
-            <span class="badge badge-pill bg-purple">0 </span>
+            <span class="badge badge-pill bg-purple">{{$totalArticulos}} </span>
         </div>
     </div>
     <!-- card-body -->
@@ -43,7 +43,10 @@
                         <!-- Botones para aumentar o disminuir la cantidad del producto en el carrito -->
                         <button
                         wire:click='decrement({{$product->id}})'
-                        class="btn btn-primary btn-xs">
+                        class="btn btn-primary btn-xs"
+                        wire:loading.attr='disable'
+                        wire:target='decrement'
+                        >
                             -
                         </button>
 
@@ -51,7 +54,11 @@
 
                         <button
                         wire:click='increment({{$product->id}})'
-                        class="btn btn-primary btn-xs">
+                        class="btn btn-primary btn-xs"
+                        wire:loading.attr='disable'
+                        wire:target='increment'
+                        {{$product->quantity >= $product->associatedModel->stock ? 'disable' : ''}}
+                        >
                             +
                         </button>
 
@@ -60,7 +67,7 @@
                     <td>
                         <!-- Boton para eliminar el producto del carrito -->
                         <button
-                        wire:click='removeItem({{$product->id}})'
+                        wire:click='removeItem({{$product->id}}, {{$product->quantity}})'
                         class="btn btn-danger btn-xs" title="Eliminar">
                         Eliminar
                             <i class="fas fa-trash-alt"></i>
