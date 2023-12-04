@@ -21,6 +21,12 @@ class SaleCreate extends Component
     public $search='';
     public $cant=5;
     public $totalRegistros=0;
+
+    //propiedades de pago
+    public $pago=0;
+    public $devuelve=0;
+
+    public $updating=0;
     public function render()
     {
         if($this->search!= ''){
@@ -28,6 +34,10 @@ class SaleCreate extends Component
         }
 
         $this->totalRegistros = Product::count();
+        if($this->updating==0){
+            $this->pago = Cart::getTotal();
+            $this->devuelve = $this->pago - Cart::getTotal();
+        }
 
 
         return view('livewire.sale.sale-create',[
@@ -38,22 +48,32 @@ class SaleCreate extends Component
         ]);
     }
 
+    public function updatingPago($value){
+        $this->updating = 1;
+        $this->pago = $value;
+        $this->devuelve = (int)$this->pago - Cart::getTotal();
+    }
+
     #[On('add-product')]
     public function addProduct(Product $product){
+        $this->updating = 0;
         Cart::add($product);
     }
     //Decrementa cantidad
     public function decrement($id){
+        $this->updating = 0;
         Cart::decrement($id);
         $this->dispatch("incrementStock.{$id}");
     }
     //Incrementa cantidad
     public function increment($id){
+        $this->updating = 0;
         Cart::increment($id);
         $this->dispatch("decrementStock.{$id}");
     }
     //elimina item
     public function removeItem($id, $qty){
+        $this->updating = 0;
         Cart::removeItem($id);
         $this->dispatch("devolverStock.{$id}", $qty);
     }
@@ -61,9 +81,19 @@ class SaleCreate extends Component
     //cancela venta
     public function clear(){
         Cart::clear();
+        $this->pago=0;
+        $this->devuelve=0;
         $this->dispatch('msg', 'Venta cancelada');
         $this->dispatch('refreshProducts');
     }
+
+    #[On('setPago')]
+    public function setPago($valor){
+        $this->updating=1;
+        $this->pago = $valor;
+        $this->devuelve = (int)$this->pago - Cart::getTotal();
+    }
+
     //listado de productos
     #[Computed()]
     public function products(){

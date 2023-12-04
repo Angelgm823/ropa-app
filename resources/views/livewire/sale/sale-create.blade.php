@@ -17,6 +17,7 @@
                 <div class="col-md-6">
                     @include('sales.card-details')
                     @include('sales.cart-pago')
+                    @livewire('sale.client')
                 </div>
 
 
