@@ -12,3 +12,5 @@
 <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
 
 <link rel="stylesheet" href="{{asset('dist/css/styles.css')}}">
+
+@yield('styles')
