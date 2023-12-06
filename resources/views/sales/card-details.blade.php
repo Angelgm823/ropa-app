@@ -8,6 +8,13 @@
             <!-- Conteo de articulos -->
             <i class="fas fa-shopping-basket ml-2" title="Numero items"></i>
             <span class="badge badge-pill bg-purple">{{$totalArticulos}} </span>
+
+            {{--Boton para crear venta--}}
+
+            <button wire:click='createSale' class="btn bg-purple ml-2">
+            <i class="fas fa-cart-plus"></i>
+                Crear venta
+            </button>
         </div>
     </div>
     <!-- card-body -->
