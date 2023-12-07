@@ -1,11 +1,11 @@
 <div>
     <x-card cardTitle="Crear venta">
         <x-slot:cardTools>
-            <a href="#" class="btn btn-primary mr-2">
-                <i class="fas fa-plus-circle"></i> Crear
+            <a href="{{route('sales.list')}}" class="btn btn-primary mr-2">
+                <i class="fas fa-shopping-cart"></i> Ir a ventas
             </a>
 
-            <a href="#" class="btn btn-danger" wire:click='clear'>
+            <a href="" class="btn btn-danger" wire:click='clear'>
                 <i class="fas fa-trash"></i> Cancelar venta
             </a>
 

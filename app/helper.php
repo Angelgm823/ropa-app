@@ -7,7 +7,7 @@ function userId(){
 
 //devuelve a formato moneda
 function money($number){
-    return number_format( $number,2,',','.');
+    return '$'.number_format( $number,2,',','.');
 }
 
 //convertir numeros a letras

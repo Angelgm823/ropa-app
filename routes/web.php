@@ -11,6 +11,7 @@ use App\Livewire\Category\CategoryComponent;
 use App\Livewire\Category\CategoryShow;
 use App\Livewire\Client\ClientShow;
 use App\Livewire\Sale\SaleCreate;
+use App\Livewire\Sale\Salelist;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,4 @@ Route::get('/clientes', ClientComponent::class)->name('clients')->middleware(['a
 Route::get('/clientes/{client}', ClientShow::class)->name('clients.show')->middleware(['auth']);
 
 Route::get('/ventas/crear', SaleCreate::class)->name('sales.create')->middleware(['auth']);
+Route::get('/sales', Salelist::class)->name('sales.list')->middleware(['auth']);
