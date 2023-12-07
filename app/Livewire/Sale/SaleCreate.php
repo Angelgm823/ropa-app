@@ -3,6 +3,7 @@
 namespace App\Livewire\Sale;
 
 use App\Models\Cart;
+use App\Models\Item;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Support\Facades\DB;
@@ -24,11 +25,13 @@ class SaleCreate extends Component
     public $cant=5;
     public $totalRegistros=0;
 
+
     //propiedades de pago
     public $pago=0;
     public $devuelve=0;
-
     public $updating=0;
+    public $client= 1;
+
     public function render()
     {
         if($this->search!= ''){
@@ -65,14 +68,41 @@ class SaleCreate extends Component
         DB::transaction(function(){
             $sale = new Sale();
             $sale->total = Cart::getTotal();
-            $sale->pago = $this->total;
-            $sale->user_id = UserID();
+            $sale->pago = $this->pago;
+            $sale->user_id = userID();
             $sale->client_id = $this->client;
             $sale->fecha = date("Y-m-d");
+            $sale->save();
+
+
+            //global $cart;
+
+            //agregar item a venta
+            foreach( \Cart::session(userID())->getContent() as $product){
+                $item = new Item();
+                $item->nombre = $product->name;
+                $item->precio = $product->price;
+                $item->cantidad = $product->quantity;
+                $item->imagen = $product->associatedModel->imagen;
+                $item->product_id = $product->id;
+                $item->fecha = date("Y-m-d");
+                $item->save();
+
+                $sale->items()->attach($item->id,['cantidad'=>$product->quantity,'fecha'=>date('Y-m-d')]);
+
+                Product::find($product->id)->decrement('stock', $product->quantity);
+            }
+            Cart::clear();
+            $this->reset(['pago', 'devuelve', 'client']);
+            $this->dispatch('msg', 'venta creada correctamente');
         });
 
     }
 
+    #[On('client_id')]
+    public function client_id($id=1){
+        $this->client=$id;
+    }
     public function updatingPago($value){
         $this->updating = 1;
         $this->pago = $value;

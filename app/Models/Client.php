@@ -17,4 +17,8 @@ class Client extends Model
         'correo',
         'nit'
     ] ;
+
+    public function sales(){
+        return $this->hasMany(Sale::class);
+    }
 }
