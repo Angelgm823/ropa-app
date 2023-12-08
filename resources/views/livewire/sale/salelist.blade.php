@@ -52,12 +52,12 @@
                         </td>
                         <td>{{$sale->fecha}}</td>
                         <td>
-                            <a href="" class="btn btn-success btn-sm" title="Ver">
+                            <a href="{{route('sales.show', $sale)}}" class="btn btn-success btn-sm" title="Ver">
                                 <i class="far fa-eye"></i>
                             </a>
                         </td>
                         <td>
-                            <a href="#" wire:click='edit({{$sale->id}})' class="btn btn-primary btn-sm" title="Editar">
+                            <a href="#" wire:click='edit({{$sale->id}})' class="btn btn-primary btn-sm" title="Editar" disabled>
                                 <i class="far fa-edit"></i>
                             </a>
                         </td>
@@ -71,7 +71,7 @@
                     @empty
 
                     <tr class="text-center">
-                        <td colspan="5">Sin registros</td>
+                        <td colspan="10">Sin registros</td>
                     </tr>
 
                     @endforelse

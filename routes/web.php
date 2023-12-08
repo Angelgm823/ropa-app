@@ -3,6 +3,7 @@
 use App\Livewire\Client\ClientComponent;
 use App\Livewire\Product\ProductComponent;
 use App\Livewire\Product\ProductShow;
+use App\Livewire\Sale\SaleShow;
 use App\Livewire\User\UserComponent;
 use App\Livewire\User\UserShow;
 use Illuminate\Support\Facades\Route;
@@ -48,3 +49,4 @@ Route::get('/clientes/{client}', ClientShow::class)->name('clients.show')->middl
 
 Route::get('/ventas/crear', SaleCreate::class)->name('sales.create')->middleware(['auth']);
 Route::get('/sales', Salelist::class)->name('sales.list')->middleware(['auth']);
+Route::get('/sales/{sale}', SaleShow::class)->name('sales.show')->middleware(['auth']);
