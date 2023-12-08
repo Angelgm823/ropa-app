@@ -1,15 +1,28 @@
 <div>
     <x-card cardTitle="Listado ventas ({{$this->totalRegistros}})">
         <x-slot:cardTools>
-            <span class="badge badge-info" style="font-size: 1.2rem;">
-                Total:
-            </span>
-            Selector de fechas
+            <div class="d-flex align-items-center">
+                <span class="badge badge-info" style="font-size: 1.2rem;">
+                    Total:
+                </span>
 
-            <a href="{{route('sales.create')}}" class="btn btn-primary">
-                <i class="fas fa-cart-plus"></i>
-                Crear venta
-            </a>
+
+                <div class="mx-3">
+                    {{$dateInicio.'_'.$dateFin}}
+                    <button class="btn btn-default" id="daterange-btn">
+                        <i class="fas fa-calendar"></i>
+                        <span>
+                            D-M-A
+                        </span>
+                        <i class="fas fa-angle-down"></i>
+                    </button>
+                </div>
+
+                <a href="{{route('sales.create')}}" class="btn btn-primary">
+                    <i class="fas fa-cart-plus"></i>
+                    Crear venta
+                </a>
+            </div>
             </x-slot>
 
             <x-table>
@@ -84,5 +97,39 @@
                 </x-slot>
     </x-card>
 
+    @section('styles')
+    <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
+
+    @endsection
+    @section('js')
+    <script src="{{asset('plugins/moment/moment.min.js')}}"> </script>
+    <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"> </script>
+    <script>
+        $('#daterange-btn').daterangepicker({
+                ranges: {
+                    'Default': [moment().startOf('year'), moment()],
+                    'Hoy': [moment(), moment()],
+                    'Ayer': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Ultimos 7 Dias': [moment().subtract(6, 'days'), moment()],
+                    'Ultimos 30 Dias': [moment().subtract(29, 'days'), moment()],
+                    'Este Mes': [moment().startOf('month'), moment().endOf('month')],
+                    'Ultimos Mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().startOf('year'),
+                endDate: moment()
+            },
+            function(start, end) {
+                dateStart = start.format('YYYY-MM-DD');
+                dateEnd = end.format('YYYY-MM-DD');
+
+                $('#daterange-btn span').html(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY'));
+
+                Livewire.dispatch('setDates',{fechaInicio: dateStart, fechaFinal: dateEnd})
+
+            }
+
+        );
+    </script>
+    @endsection
 
 </div>

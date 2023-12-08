@@ -19,6 +19,10 @@ class Salelist extends Component
     public $totalRegistros=0;
     public $cant=5;
 
+    public $totalVentas=0;
+    public $dateInicio;
+    public $dateFin;
+
 
     public function render()
     {
@@ -27,7 +31,20 @@ class Salelist extends Component
         }
         $this->totalRegistros = Sale::count();
 
-        $sales = Sale::where('id', 'like', '%'.$this->search. '%')
+        $salesQuery = Sale::where('id', 'like', '%'.$this->search. '%');
+
+        if($this->dateInicio && $this->dateFin){
+            $salesQuery = $salesQuery->whereBetween('fecha',[$this->dateInicio,$this->dateFin]);
+
+            $this->totalVentas = $salesQuery->sum('total');
+        }else{
+            $this->totalVentas = Sale::sum('total');
+        }
+
+
+
+        $sales = $salesQuery
+
         ->orderBy('id', 'desc')
         ->paginate($this->cant);
 
@@ -48,5 +65,15 @@ class Salelist extends Component
         $sale->delete();
 
         $this->dispatch('msg','venta eliminada');
+    }
+
+    #[On('setDates')]
+    public function setDates(
+        $fechaInicio, $fechaFinal
+    ){
+        //dump($fechaInicio, $fechaFinal);
+
+        $this->dateInicio = $fechaInicio;
+        $this->dateFin = $fechaFinal;
     }
 }
