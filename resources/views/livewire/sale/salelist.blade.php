@@ -3,12 +3,12 @@
         <x-slot:cardTools>
             <div class="d-flex align-items-center">
                 <span class="badge badge-info" style="font-size: 1.2rem;">
-                    Total:
+                    Total:{{money($this->totalVentas)}}
                 </span>
 
 
                 <div class="mx-3">
-                    {{$dateInicio.'_'.$dateFin}}
+                    {{--{{$dateInicio.'_'.$dateFin}}--}}
                     <button class="btn btn-default" id="daterange-btn">
                         <i class="fas fa-calendar"></i>
                         <span>
