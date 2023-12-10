@@ -13,7 +13,14 @@
 
             <button wire:click='createSale' class="btn bg-purple ml-2">
             <i class="fas fa-cart-plus"></i>
-                Crear venta
+                Crear
+                @if (auth()->user()->admin)
+                    venta
+                @endif
+
+                @if (auth()->user()->client)
+                    compra
+                @endif
             </button>
         </div>
     </div>

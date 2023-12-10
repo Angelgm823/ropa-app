@@ -125,6 +125,15 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{route('user.venta')}}" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i>
+                        <p>
+                            Comprar
+                        </p>
+                    </a>
+                </li>
             </ul>
             @endif
         </nav>

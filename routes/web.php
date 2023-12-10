@@ -17,6 +17,7 @@ use App\Livewire\Sale\Salelist;
 use App\Livewire\Shop\ShopComponent;
 use App\Livewire\Usuarios\Producto;
 use App\Livewire\Usuarios\Productos;
+use App\Livewire\Usuarios\Venta;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,3 +60,4 @@ Route::get('/tienda', ShopComponent::class)->name('tienda')->middleware(['auth']
 
 Route::get('/usuarios/productos', Productos::class)->name('user.products')->middleware(['auth']);
 Route::get('/usuarios/productos/{product}', Producto::class)->name('user.product')->middleware(['auth']);
+Route::get('/usuarios/venta', Venta::class)->name('user.venta')->middleware(['auth']);
