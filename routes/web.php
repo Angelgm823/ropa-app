@@ -56,5 +56,5 @@ Route::get('/sales/{sale}', SaleShow::class)->name('sales.show')->middleware(['a
 
 Route::get('/tienda', ShopComponent::class)->name('tienda')->middleware(['auth']);
 
-Route::get('/usuarios/productos', Productos::class)->name('user.products')->middleware(['auth']);
-Route::get('/usuarios/productos/{product}', Producto::class)->name('user.product')->middleware(['auth']);
+Route::get('/usuarios/productos', Productos::class)->name('user.products')->middleware(['auth', 'users']);
+Route::get('/usuarios/productos/{product}', Producto::class)->name('user.product')->middleware(['auth', 'users']);
