@@ -31,7 +31,7 @@
                     </td>
                     <td>{!!$product->activeLabel!!}</td>
                     <td>
-                        <a href="{{route('products.show', $product)}}" class="btn btn-success btn-xs" title="ver">
+                        <a href="{{route('user.product', $product)}}" class="btn btn-success btn-xs" title="ver">
                             <i class="far fa-eye"></i>
                         </a>
                     </td>
