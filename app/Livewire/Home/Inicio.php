@@ -21,7 +21,6 @@ class Inicio extends Component
     public function render()
     {
         $this->sales_today();
-        $this->calVentasMes();
 
         return view('livewire.home.inicio');
     }
@@ -32,9 +31,5 @@ class Inicio extends Component
         $this->articulosHoy = Item::whereDate('fecha',date('Y-m-d'))->sum('cantidad');
         $this->productosHoy = Item::whereDate('fecha',date('Y-m-d'))->groupBy('product_id')->count();
     }
-    public function calVentasMes(){
-        for($i= 1;$i<= 12;$i++){
-         $this->listTotalVentasMes .= Sale::whereMonth('fecha','=',$i)->sum('total').',';
-        }
-    }
+
 }

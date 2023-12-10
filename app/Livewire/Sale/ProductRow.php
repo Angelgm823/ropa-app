@@ -3,7 +3,6 @@
 namespace App\Livewire\Sale;
 
 use App\Models\Product;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ProductRow extends Component
@@ -12,6 +11,7 @@ class ProductRow extends Component
     public Product $product;
     public $stock;
     public $stockLabel;
+    public $cantidad;
 
     protected function getListeners(){
         return [
@@ -51,8 +51,8 @@ class ProductRow extends Component
         $this->stock++;
     }
 
-    public function devolverStock($qty){
-        $this->stock = $this->$qty;
+    public function devolverStock($cantidad){
+        $this->stock = $this->$cantidad;
     }
 
     public function stockLabel(){
