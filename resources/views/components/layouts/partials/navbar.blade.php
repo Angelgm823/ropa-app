@@ -17,6 +17,7 @@
       @livewire('search')
       </li>
 
+      @if (auth()->check())
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <img src="{{auth()->user()->imagen}}" class="user-image img-circle elevation-2" alt="User Image">
@@ -51,6 +52,7 @@
           </li>
         </ul>
       </li>
+      @endif
 
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">

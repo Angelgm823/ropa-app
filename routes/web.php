@@ -11,6 +11,7 @@ use App\Livewire\Home\Inicio;
 use App\Livewire\Category\CategoryComponent;
 use App\Livewire\Category\CategoryShow;
 use App\Livewire\Client\ClientShow;
+use App\Livewire\Registro;
 use App\Livewire\Sale\SaleCreate;
 use App\Livewire\Sale\Salelist;
 use App\Livewire\Shop\ShopComponent;
@@ -31,8 +32,8 @@ use App\Livewire\Usuarios\Productos;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-
-Auth::routes(['register' => false]);
+Auth::routes();
+//Route::get('registro', Registro::class)->name('register')->middleware('auth');
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -56,5 +57,5 @@ Route::get('/sales/{sale}', SaleShow::class)->name('sales.show')->middleware(['a
 
 Route::get('/tienda', ShopComponent::class)->name('tienda')->middleware(['auth']);
 
-Route::get('/usuarios/productos', Productos::class)->name('user.products')->middleware(['auth', 'users']);
-Route::get('/usuarios/productos/{product}', Producto::class)->name('user.product')->middleware(['auth', 'users']);
+Route::get('/usuarios/productos', Productos::class)->name('user.products')->middleware(['auth']);
+Route::get('/usuarios/productos/{product}', Producto::class)->name('user.product')->middleware(['auth']);

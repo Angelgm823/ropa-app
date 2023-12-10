@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/usuarios/productos';
 
     /**
      * Create a new controller instance.
@@ -64,10 +66,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+        $user = null;
+
+        DB::transaction(function () use ( $data, &$user ) {
+
+            $client = new Client();
+            $client->nombre = $data['name'];
+            $client->identificacion = 'sadsd';
+            $client->correo = $data['email'];
+
+            $client->save();
+
+            // TODO: Crear nuevo usuario en el sistema
+           $user = User::create([
+                'email' => $data['email'],
+                'name' => $data['name'],
+                'password' => Hash::make($data['password']),
+                'client' => true,
+                'admin' => false,
+                'client_id' => $client->id,
+            ]);
+        });
+        return $user;
     }
 }
