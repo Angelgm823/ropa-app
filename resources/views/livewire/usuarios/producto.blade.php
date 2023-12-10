@@ -1,6 +1,6 @@
 <x-card cardTitle="Detalles de productos">
     <x-slot:cardTools>
-        <a href="{{ route('products') }}" class="btn btn-primary">
+        <a href="{{ route('user.products') }}" class="btn btn-primary">
             <i class="fas fa-arrow-circle-left"></i> Regresar
         </a>
     </x-slot>

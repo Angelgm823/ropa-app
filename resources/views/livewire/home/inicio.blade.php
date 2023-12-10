@@ -1,5 +1,5 @@
 <div>
-
+    @if(auth()->user()->admin)
     <x-card cardTitle="Bienvenidos" cardFooter="">
         <x-slot:cardTools>
             <a href="{{route('sales.list')}}" class="btn btn-primary">
@@ -16,4 +16,10 @@
 
 
     </x-card>
+    @endif
+    @if (auth()->user()->client)
+        <x-card >
+            Bienvenidos
+        </x-card>
+    @endif
 </div>
