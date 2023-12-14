@@ -1,5 +1,5 @@
 <div>
-    <x-card cardTitle="Crear venta">
+    <x-card cardTitle="Crear compra">
         <x-slot:cardTools>
 
             <a href="" class="btn btn-danger" wire:click='clear'>

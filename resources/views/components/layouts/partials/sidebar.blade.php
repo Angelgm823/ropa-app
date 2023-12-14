@@ -128,12 +128,40 @@
 
                 <li class="nav-item">
                     <a href="{{route('user.venta')}}" class="nav-link">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Comprar
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{route('user.quienes')}}" class="nav-link">
+                    <i class="nav-icon far fa-address-card"></i>
+                        <p>
+                            ¿Quienes somos?
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('user.location')}}" class="nav-link">
+                    <i class="nav-icon fas fa-location-arrow"></i>
+                        <p>
+                            Ubicación
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('user.contactar')}}" class="nav-link">
+                    <i class="nav-icon fab fa-whatsapp"></i>
+                        <p>
+                            Contactanos
+                        </p>
+                    </a>
+                </li>
+
             </ul>
             @endif
         </nav>

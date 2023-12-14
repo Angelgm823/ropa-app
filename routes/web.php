@@ -3,6 +3,7 @@
 use App\Livewire\Client\ClientComponent;
 use App\Livewire\Product\ProductComponent;
 use App\Livewire\Product\ProductShow;
+use App\Livewire\QuienesSomos;
 use App\Livewire\Sale\SaleShow;
 use App\Livewire\User\UserComponent;
 use App\Livewire\User\UserShow;
@@ -11,6 +12,8 @@ use App\Livewire\Home\Inicio;
 use App\Livewire\Category\CategoryComponent;
 use App\Livewire\Category\CategoryShow;
 use App\Livewire\Client\ClientShow;
+use App\Livewire\Contactar;
+use App\Livewire\LocationComponent;
 use App\Livewire\Registro;
 use App\Livewire\Sale\SaleCreate;
 use App\Livewire\Sale\Salelist;
@@ -61,3 +64,7 @@ Route::get('/tienda', ShopComponent::class)->name('tienda')->middleware(['auth']
 Route::get('/usuarios/productos', Productos::class)->name('user.products')->middleware(['auth']);
 Route::get('/usuarios/productos/{product}', Producto::class)->name('user.product')->middleware(['auth']);
 Route::get('/usuarios/venta', Venta::class)->name('user.venta')->middleware(['auth']);
+Route::get('/usuarios/ubicacion', LocationComponent::class)->name('user.location')->middleware(['auth']);
+Route::get('/usuarios/quienessomos', QuienesSomos::class)->name('user.quienes')->middleware(['auth']);
+Route::get('/usuarios/conatct', Contactar::class)->name('user.contactar')->middleware(['auth']);
+
